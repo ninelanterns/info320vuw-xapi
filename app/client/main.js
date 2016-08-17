@@ -35,7 +35,7 @@ Template.main.events({
       id: 'http://www.LRS.com/test4'
     },
   };
-
+  // Clientside passes through a xapi statement to methods.js post method.
   Meteor.call('post', data, function(err, result) {
     console.log('call finished,' + result)
   });
