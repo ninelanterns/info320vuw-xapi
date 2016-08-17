@@ -14,6 +14,7 @@ Template.main.helpers({
 });
 
 Template.main.events({
+  //This event fires when user clicks 'submit' button.
   'click button'(event, instance) {
 
     console.log('hihih')
@@ -36,8 +37,8 @@ Template.main.events({
     },
   };
   // Clientside passes through a xapi statement to methods.js post method.
-  Meteor.call('post', data, function(err, result) {
-    console.log('call finished,' + result)
+  Meteor.call('post', data, function() {
+    console.log('call finished');
   });
 
   },
