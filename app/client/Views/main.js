@@ -16,21 +16,19 @@ Template.main.helpers({
 Template.main.events({
   //This event fires when user clicks 'submit' button.
   'click button'(event, instance) {
-
-    console.log('hihih')
     var data = {
-    id: "cbfbd87a-d394-43e5-8723-28c0718a377a",
+    id: "cbfbd87a-d394-43e5-8723-28c0718b377a",
     actor: {
-      name : "Mary Jane",
-      mbox : "mailto:mary@example.com"
+      name : "Liam Murphy",
+      mbox : "mailto:liam@example.com"
     },
     verb: {
       id: "http://adlnet.gov/expapi/verbs/experienced",
-      display: { "en-US" : "performed" }
+      display: { "en-US" : "confirmed" }
     },
     object: {
       definition: {
-        description: { "en-US" : "delivered a baby" }
+        description: { "en-US" : "App submits to LRS" }
       },
       objectType: 'Activity',
       id: 'http://www.LRS.com/test4'
