@@ -1,14 +1,13 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
-import './main.html';
+// import { Template } from 'meteor/templating';
+// import { ReactiveVar } from 'meteor/reactive-var';
+// import './main.html';
 
 Template.main.onCreated(function () {
   // code here
 });
 
 Template.main.helpers({
-  //example helpers
-
+  //example helper
   // functionName() {
   // code here
   // },
@@ -54,10 +53,10 @@ Template.main.events({
         mbox : "mailto:liam@example.com"
       }
     };
+
   // Client passes through an xapi statement to the server/methods.js 'post' method.
-  Meteor.call('post', stmt1, function(error, result) {
-    //callback function
-    debugger;
+  Meteor.call('post', stmt1, function() {
+    //callback after statement has been submitted
   });
   },
 });
