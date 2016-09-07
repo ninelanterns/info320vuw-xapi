@@ -1,6 +1,6 @@
 Meteor.methods({
   // validates user xapi statements and then submits them to LL LRS.
-  'post'(data) {
+  'post'(stmt) {
     //Validates statements
     //
 
@@ -11,7 +11,11 @@ Meteor.methods({
       headers: {
         'X-Experience-API-Version': '1.0.1',
       },
-      data: data,
+      data: stmt,
+    }, function(err, result) {
+      console.log(result);
+      return result;
     });
+
   }
 });
