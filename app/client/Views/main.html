@@ -2,24 +2,27 @@
   <title>Learning moments app</title>
   <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'/>
   <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+
+  <!-- Notes for Michael -->
+  <!-- your css files do not need to be linked into the page, simply have your css files inside the client folder
+  and they will automatically be included
+
+  Inside template name="main" put your html code, interface simply needs to look like your Invision app, you can decide
+  whether you want to have multiple screens or simply make it a really long scrolling page (really long scrolling
+  page probably easier to implment).
+  -->
+
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <h1>Learning moments app</h1>
+  <!-- inserts template with name == main into page -->
   {{> main}}
 </body>
 
+<!-- template for http://localhost:3000/ -->
 <template name="main">
-  <button id='submit'>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
 
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com">Discussions</a></li>
-  </ul>
+  <!-- This is the button that currently submits an xpai statement -->
+  <button id='submit'>Click Me</button>
 </template>
