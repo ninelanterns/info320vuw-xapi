@@ -18,13 +18,60 @@
 
 <body>
   <h1>Learning moments app</h1>
-  <!-- inserts template with name == main into page -->
+  <!-- inserts template with name 'main' into page -->
   {{> main}}
 </body>
 
 <!-- template for http://localhost:3000/ -->
 <template name="main">
 
+  <div class='container-fluid'>
+    <div class='row'>
+      <div class='col-xs-12'>
+        <h2>Recent Activities</h2>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='col-xs-12'>
+
+<!--    Temporarily commented out untill functionality implemented
+        {{#each recentActivities}}
+          <p>{{this.stmt}}</p>
+        {{/each}} -->
+
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='col-xs-12'>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-xs-12'>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-xs-12'>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-xs-12'>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-xs-12'>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-xs-12'>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-xs-12'>
+      </div>
+    </div>
+  </div>
   <!-- This is the button that currently submits an xpai statement -->
   <button id='submit' class='btn btn-lg'>Click Me</button>
 </template>
