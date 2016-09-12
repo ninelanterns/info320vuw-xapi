@@ -3,7 +3,7 @@ Meteor.methods({
   'post'(stmt) {
     //Validates statements
     //
-
+    stmt.id = Math.uuid();
     //submits to LRS
     HTTP.post('https://v2.learninglocker.net/v1/data/xAPI/statements', {
       //TODO: put key and secret in settings.json file and configure gitignore
