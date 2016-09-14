@@ -5,7 +5,7 @@
 Template.main.onCreated(function () {
   // code here
 });
-
+ 
 Template.main.helpers({
   //example helper
   // functionName() {
