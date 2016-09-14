@@ -46,14 +46,16 @@
                 <option selected value="default">Please pick an activity</option>
                 <option value="Babybirth">Baby birth</option>
                 <option value="Meeting">Meeting</option>
-                <option value="venepuncture">Venepuncture</option>
+                <option value="Venepuncture">Venepuncture</option>
               </select>
             </div>
 
             <div class="moment-q">
               <h2>How did you interact with the activity?</h2>
               <select name="verb" id="verb">
-                
+                {{#each verbOptions}}
+                <option value={{this}}>{{this}}</option>
+                {{/each}}
               </select>
             </div>
 
