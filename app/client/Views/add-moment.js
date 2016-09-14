@@ -1,5 +1,6 @@
 Session.set('verb', false);
 Session.set('circumstance', false);
+Session.set('location', false);
 Session.set('activityText', '...');
 Session.set('verbText', '...');
 
@@ -8,6 +9,7 @@ Template.addmoment.onCreated(function (){
 
 });
 Template.addmoment.events({
+
   //this function occurs whenever the user selects an activity
   'change #activities': function() {
     //Arrays of verbs for the activities
@@ -18,6 +20,7 @@ Template.addmoment.events({
     //resets session variables, required in case the user changes their activity halfway through the input process that all fields reset correctly
     Session.set('verb', false);
     Session.set('circumstance', false);
+    Session.set('location', false);
     Session.set('verbText', '...');
 
     //gets the activity the user selected
@@ -50,13 +53,18 @@ Template.addmoment.events({
       Session.set('verb', false);
     }
   },
+
   //this function occurs whenever the user selects a verb
   'change #verb': function() {
     //Arrays of circumstances for the verbs
-    var delivered = ['C-Section','Ventouse', 'Forceps', 'Vaginal','Emergency'];
-    var attended = ['TypeOfMeeting1', 'TypeOfMeeting2'];
-    var Attempted = [];
+    var deliveredCircumstances = ['C-Section','Ventouse', 'Forceps', 'Vaginal','Emergency'];
+    var attendedCircumstances = ['Professional development', 'Monthly meeting'];
+    var AttemptedCircumstances = [];
     var error = ['Please select only a valid use case'];
+
+    //Arrays of locations for verb / activities
+    var deliveredLocations = ['Hospital', 'Vehicle (car etc.)', 'Other'];
+    var meetingLocations = ['Place of employment', 'Town Hall'];
 
     //gets the verb the user selected
     var selected = $('#verb').val();
@@ -64,17 +72,21 @@ Template.addmoment.events({
 
     //Sets circumstance session variable to an array of contexts relating to the activity / verb selected
     if (selected === 'delivered') {
-      Session.set('circumstance', delivered);
+      Session.set('circumstance', deliveredCircumstances);
+      Session.set('location', deliveredLocations);
     }
     else if (selected === 'attended') {
-      Session.set('circumstance', attended);
+      Session.set('circumstance', attendedCircumstances);
+      Session.set('location', meetingLocations);
     }
     else if (selected === 'Attempted') {
-      Session.set('circumstance', Attempted);
+      Session.set('circumstance', AttemptedCircumstances);
     }
     else {
       Session.set('circumstance', error);
     }
+
+
   }
 });
 Template.addmoment.helpers({
@@ -93,6 +105,9 @@ Template.addmoment.helpers({
   //returns the array of possible circumstances for the selected activity / verb to the html page so that it can display them
   circumstanceOptions: function() {
     return Session.get('circumstance');
+  },
+  locationOptions: function() {
+    return Session.get('location');
   }
 
 });
