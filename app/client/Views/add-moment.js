@@ -66,9 +66,11 @@ Template.addmoment.events({
   }
 });
 Template.addmoment.helpers({
+  // returns a string of the activity that is displayed in the 'statement viewer'
   activityText: function() {
     return Session.get('activityText');
   },
+  // returns a string of the verb that is displayed in the 'statement viewer'
   verbText: function() {
     return Session.get('verbText');
   },
