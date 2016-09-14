@@ -105,6 +105,7 @@ Template.addmoment.events({
 
   }
 });
+
 Template.addmoment.helpers({
   // returns a string of the activity that is displayed in the 'statement viewer'
   activityText: function() {

@@ -91,11 +91,9 @@
 
             <div class="moment-q" id='roleDiv'>
               <h2>Who else was involved in the activity?</h2>
-              <select name="role" id='role'>
                 {{#each roleOptions}}
-                <option value={{this}}>{{this}}</option>
-                {{/each}}
-              </select>
+                <input type="checkbox" name="{{this}}" value="{{this}}"><label> {{this}}</label><br>
+                {{/each}}    
             </div>
 
             <div class="moment-q">
