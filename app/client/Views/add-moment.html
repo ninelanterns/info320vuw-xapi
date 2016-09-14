@@ -74,10 +74,9 @@
 
             <div class="moment-q">
               <h2>What were the circumstances?</h2>
-              <input type="checkbox" name="vehicle" value="Bike"><label>I have a bike</label><br>
-              <input type="checkbox" name="vehicle" value="Car" ><label>I have a car</label><br>
-              <input type="checkbox" name="vehicle" value="Bike"><label>I have a bike</label><br>
-              <input type="checkbox" name="vehicle" value="Car"><label>I have a car</label><br>
+              {{#each circumstanceOptions}}
+                <input type="checkbox" name="{{this}}" value="{{this}}"><label>{{this}}</label><br>
+              {{/each}}
             </div>
 
             <div class="moment-q">
