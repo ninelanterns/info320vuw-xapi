@@ -3,8 +3,7 @@ Template.addmoment.onCreated(function (){
 
 });
 Template.addmoment.events({
-  //example helper
-  // functionName() {
-  // code here
-  // },
+  'change #activities': function(a,b) {
+    var selected = $('#activities').val();
+  }
 });
