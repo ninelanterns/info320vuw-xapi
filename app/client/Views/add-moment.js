@@ -15,6 +15,11 @@ Template.addmoment.events({
     var Meeting = ['select a verb','attended','participated'];
     var Venepuncture = ['select a verb','Attempted','Completed','Failed'];
 
+    //resets session variables, required in case the user changes their activity halfway through the input process that all fields reset correctly
+    Session.set('verb', false);
+    Session.set('circumstance', false);
+    Session.set('verbText', '...');
+
     //gets the activity the user selected
     var selected = $('#activities').val();
     Session.set('activityText', selected);
