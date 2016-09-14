@@ -33,9 +33,10 @@ Template.addmoment.events({
   //this function occurs whenever the user selects a verb
   'change #verb': function() {
     //Arrays of circumstances for the verbs
-    var delivered = ['C-Section','Ventouse', 'Forceps', 'Vaginal'];
+    var delivered = ['C-Section','Ventouse', 'Forceps', 'Vaginal','Emergency'];
     var attended = ['TypeOfMeeting1', 'TypeOfMeeting2'];
     var Attempted = [];
+    var error = ['Please select only a valid use case'];
 
     //gets the verb the user selected
     var selected = $('#verb').val();
@@ -50,7 +51,7 @@ Template.addmoment.events({
       Session.set('circumstance', Attempted);
     }
     else {
-      Session.set('circumstance', false);
+      Session.set('circumstance', error);
     }
   }
 });
