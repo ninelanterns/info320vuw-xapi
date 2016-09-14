@@ -11,7 +11,7 @@ Template.addmoment.events({
   //this function occurs whenever the user selects an activity
   'change #activities': function() {
     //Arrays of verbs for the activities
-    var Babybirth = ['select a verb','delivered','fed','bathed'];
+    var Baby = ['select a verb','delivered','fed','bathed'];
     var Meeting = ['select a verb','attended','participated'];
     var Venepuncture = ['select a verb','Attempted','Completed','Failed'];
 
@@ -25,14 +25,26 @@ Template.addmoment.events({
     Session.set('activityText', selected);
 
     //Sets verb session variable to an array of verbs relating to the activity selected
-    if (selected === 'Babybirth') {
-      Session.set('verb',Babybirth);
+    if (selected === 'Baby') {
+      Session.set('verb',Baby);
+
+      //Unhides location and circumstances div if user previously selected venepuncture activity
+      $('#locationDiv').show();
+      $('#circumstanceDiv').show();
     }
     else if (selected === 'Meeting') {
       Session.set('verb',Meeting);
+
+      //Unhides location and circumstances div if user previously selected venepuncture activity
+      $('#locationDiv').show();
+      $('#circumstanceDiv').show();
     }
     else if (selected === 'Venepuncture') {
       Session.set('verb',Venepuncture);
+
+      //Hides location and circumstances div since Venepuncture can be assumed to always happen in a doctors office or similar location under always similar contexts
+      $('#locationDiv').fadeOut();
+      $('#circumstanceDiv').fadeOut();
     }
     else {
       Session.set('verb', false);

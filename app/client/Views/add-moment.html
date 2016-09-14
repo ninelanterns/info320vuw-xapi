@@ -41,10 +41,10 @@
           <form>
 
             <div class="moment-q">
-              <h2>Pick your activity</h2>
+              <h2>Pick your object / activity</h2>
               <select name="activities" id="activities">
-                <option selected value="...">Please pick an activity</option>
-                <option value="Babybirth">Baby birth</option>
+                <option selected value="...">Please pick an object / activity</option>
+                <option value="Baby">Baby</option>
                 <option value="Meeting">Meeting</option>
                 <option value="Venepuncture">Venepuncture</option>
               </select>
@@ -73,14 +73,14 @@
 
             <!-- need to put the things in between here !-->
 
-            <div class="moment-q">
+            <div class="moment-q" id='circumstanceDiv'>
               <h2>What were the circumstances?</h2>
               {{#each circumstanceOptions}}
                 <input type="checkbox" name="{{this}}" value="{{this}}"><label> {{this}}</label><br>
               {{/each}}
             </div>
 
-            <div class="moment-q">
+            <div class="moment-q" id='locationDiv'>
               <h2>What location did your activity take place?</h2>
               <select name="cars">
                 <option value="volvo">Volvo</option>
