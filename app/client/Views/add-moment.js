@@ -30,7 +30,6 @@ Template.addmoment.events({
     counter = counter - 1;
     //sets a session variable of the counter so that it can later easily be added to the statement as result
     Session.set('result', counter);
-    console.log(Session.get('result'))
     },
 
   //this function occurs whenever the user selects an activity
@@ -130,7 +129,7 @@ Template.addmoment.events({
     var verb = $('#verb').val();
     var object = $('#activities').val();
     var statementTemplate = {};
-
+    var result = Session.get('result') / 5;
     //Hardcoded actor set to Mary Jane
     statementTemplate.actor = {
       name : "Mary Jane",
@@ -153,8 +152,7 @@ Template.addmoment.events({
 
     statementTemplate.result = {
       score: {
-        //TODO make result come from the star rating
-        scaled: 0.80
+        scaled: result
       }
     };
 
