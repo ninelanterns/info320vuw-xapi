@@ -1,5 +1,7 @@
 Session.set('verb', false);
 Session.set('circumstance', false);
+Session.set('activityText', '...');
+Session.set('verbText', '...');
 
 Template.addmoment.onCreated(function (){
   //code runs once template is loaded
@@ -15,8 +17,9 @@ Template.addmoment.events({
 
     //gets the activity the user selected
     var selected = $('#activities').val();
+    Session.set('activityText', selected);
 
-    //Sets verb session equal to selected activity
+    //Sets verb session variable to an array of verbs relating to the activity selected
     if (selected === 'Babybirth') {
       Session.set('verb',Babybirth);
     }
@@ -40,7 +43,9 @@ Template.addmoment.events({
 
     //gets the verb the user selected
     var selected = $('#verb').val();
-    console.log(selected);
+    Session.set('verbText', selected);
+
+    //Sets circumstance session variable to an array of contexts relating to the activity / verb selected
     if (selected === 'delivered') {
       Session.set('circumstance', delivered);
     }
@@ -56,9 +61,17 @@ Template.addmoment.events({
   }
 });
 Template.addmoment.helpers({
+  activityText: function() {
+    return Session.get('activityText');
+  },
+  verbText: function() {
+    return Session.get('verbText');
+  },
+  //returns the array of possible verbs for the selected activity to the html page so that it can display them
   verbOptions: function() {
     return Session.get('verb');
   },
+  //returns the array of possible circumstances for the selected activity / verb to the html page so that it can display them
   circumstanceOptions: function() {
     return Session.get('circumstance');
   }
