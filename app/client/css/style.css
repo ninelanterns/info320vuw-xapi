@@ -73,6 +73,12 @@ h3 {
    position: absolute;
    cursor: pointer;
 }
+.rating > .star:before,
+.rating > .star ~ .star:before {
+   content: "\2605";
+   position: absolute;
+   cursor: pointer;
+}
 
 .image-bg-fluid-height,
 .image-bg-fixed-height {

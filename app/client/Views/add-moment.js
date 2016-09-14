@@ -11,6 +11,28 @@ Template.addmoment.onCreated(function (){
 });
 Template.addmoment.events({
 
+  'click .rating > span': function(e) {
+    e.preventDefault();
+    //If user previously selected a rating then it is removed so that star rating tool functions as expected
+    $('.star').removeClass('star');
+
+    var rating = $(e.target).attr('id'); // Gets an ID i.e. star4
+    rating = rating.slice(-1); // 'star4' becomes '4'
+    rating = parseInt(rating); // converts 4 into a number rather than string
+    rating++; // 4 becomes 5, this is so the selected star itself is highlighted by the while loop below
+    var counter = 1;
+
+    //for each star below the selected star becomes highlighted
+    while (rating > counter) {
+      $('#star' + counter).addClass('star');
+      counter++;
+    }
+    counter = counter - 1;
+    //sets a session variable of the counter so that it can later easily be added to the statement as result
+    Session.set('result', counter);
+    console.log(Session.get('result'))
+    },
+
   //this function occurs whenever the user selects an activity
   'change #activities': function() {
     //Arrays of verbs for the activities
