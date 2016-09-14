@@ -102,8 +102,107 @@ Template.addmoment.events({
       Session.set('circumstance', error);
     }
 
+  },
+  //This function is called when user clicks 'save moment' button at bottom of page
+  'click #submit-lm': function() {
+    var verb = $('#verb').val();
+    var object = $('#activities').val();
+    var statementTemplate = {};
 
+    //Hardcoded actor set to Mary Jane
+    statementTemplate.actor = {
+      name : "Mary Jane",
+      mbox : "mailto:liam@example.com"
+    };
+
+    statementTemplate.verb = {
+      id : "https://www.LRS.xyz/verbs/" + verb,
+      display : { "en-US" : verb }
+    };
+
+    statementTemplate.object = {
+      id : "https://www.LRS.xyz/objects/" + verb + "-" + object,
+      objectType : "Activity",
+      definition : {
+        name : { "en-US" : verb + ' ' + object },
+        description : { "en-US" : verb + ' ' + object }
+      }
+    };
+
+    statementTemplate.result = {
+      score: {
+        //TODO make result come from the star rating
+        scaled: 0.80
+      }
+    };
+
+    //Like actor authority is hardcoded into the statement
+    statementTemplate.authority = {
+      name : "Mary Jane",
+      mbox : "mailto:liam@example.com"
+    };
+
+    //Fills out the context depending on which type of statement it is. (Baby delivery / Attending a meeting / Attempting venepuncture)
+    if ( verb === 'delivered') {
+
+      var timePressure = $('#emergency') === true ? 'Emergency' : 'Elective';
+      var location = $('#location').val();
+      var reflection = $('#reflection').val() !== "" ? $('#reflection').val() : false;
+
+      //This gets simply gets all values from the role checkboxes and maps them into an array
+      var roles = $('input[name="role"]:checked').map(function() {
+        return this.value;
+      }).get();
+      //If the array is empty (nobody helped the person) then the result is converted into more human friendly format
+      roles = roles[0] === undefined ? "Completed task alone" : roles;
+
+      statementTemplate.context = {
+        extensions : {
+          "https://wwww.LRS.xyz/context/time-pressure" : timePressure,
+          "https://www.LRS.xyz/context/location" : location,
+          "https://www.LRS.xyz/context/sub-activity" : "c-section",
+          "http://www.LRS.xyz/context/reflection" : reflection,
+          "http://www.LRS.xyz/context/people": roles
+        }
+      };
+    }
+    if (verb === 'attended') {
+      var location = $('#location').val();
+      var reflection = $('#reflection').val() !== "" ? $('#reflection').val() : false;
+
+      var meetingType = $('input[name="circumstances"]:checked').map(function() {
+        return this.value;
+      }).get();
+      meetingType = meetingType[0];
+
+      //This gets simply gets all values from the role checkboxes and maps them into an array
+      var roles = $('input[name="role"]:checked').map(function() {
+        return this.value;
+      }).get();
+      roles = roles[0];
+
+      statementTemplate.context = {
+        extensions : {
+          "https://www.LRS.xyz/context/location" : location,
+          "https://www.LRS.xyz/context/meetingtype" : meetingType,
+          "http://www.LRS.xyz/context/reflection" : reflection,
+          "http://www.LRS.xyz/context/people": roles
+        }
+      };
+    }
+  if (verb === 'Attempted') {
+    var reflection = $('#reflection').val() !== "" ? $('#reflection').val() : false;
+
+    statementTemplate.context = {
+      extensions : {
+        "http://www.LRS.xyz/context/reflection" : reflection
+      }
+    };
   }
+  // Client passes through the statement to the server/methods.js 'post' method.
+  Meteor.call('post', statementTemplate, function() { console.log('submitted'); });
+
+}
 });
 
 Template.addmoment.helpers({
