@@ -3,6 +3,7 @@ Template.addmoment.onCreated(function (){
 
 });
 Template.addmoment.events({
+  //this function occurs whenever the user selects an activity
   'change #activities': function(a,b) {
     var selected = $('#activities').val();
   }
