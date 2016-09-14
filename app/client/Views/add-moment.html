@@ -89,13 +89,12 @@
               </select>
             </div>
 
-            <div class="moment-q">
+            <div class="moment-q" id='roleDiv'>
               <h2>Who else was involved in the activity?</h2>
-              <select name="cars">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="fiat">Fiat</option>
-                <option value="audi">Audi</option>
+              <select name="role" id='role'>
+                {{#each roleOptions}}
+                <option value={{this}}>{{this}}</option>
+                {{/each}}
               </select>
             </div>
 

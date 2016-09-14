@@ -3,6 +3,7 @@ Session.set('circumstance', false);
 Session.set('location', false);
 Session.set('activityText', '...');
 Session.set('verbText', '...');
+Session.set('role', false);
 
 Template.addmoment.onCreated(function (){
   //code runs once template is loaded
@@ -21,6 +22,7 @@ Template.addmoment.events({
     Session.set('verb', false);
     Session.set('circumstance', false);
     Session.set('location', false);
+    Session.set('role', false);
     Session.set('verbText', '...');
 
     //gets the activity the user selected
@@ -29,11 +31,12 @@ Template.addmoment.events({
 
     //Sets verb session variable to an array of verbs relating to the activity selected
     if (selected === 'Baby') {
-      Session.set('verb',Baby);
+    Session.set('verb',Baby);
 
       //Unhides location and circumstances div if user previously selected venepuncture activity
       $('#locationDiv').show();
       $('#circumstanceDiv').show();
+      $('#roleDiv').show();
     }
     else if (selected === 'Meeting') {
       Session.set('verb',Meeting);
@@ -41,6 +44,7 @@ Template.addmoment.events({
       //Unhides location and circumstances div if user previously selected venepuncture activity
       $('#locationDiv').show();
       $('#circumstanceDiv').show();
+      $('#roleDiv').show();
     }
     else if (selected === 'Venepuncture') {
       Session.set('verb',Venepuncture);
@@ -48,6 +52,7 @@ Template.addmoment.events({
       //Hides location and circumstances div since Venepuncture can be assumed to always happen in a doctors office or similar location under always similar contexts
       $('#locationDiv').fadeOut();
       $('#circumstanceDiv').fadeOut();
+      $('#roleDiv').fadeOut();
     }
     else {
       Session.set('verb', false);
@@ -66,6 +71,15 @@ Template.addmoment.events({
     var deliveredLocations = ['Hospital', 'Vehicle (car etc.)', 'Other'];
     var meetingLocations = ['Place of employment', 'Town Hall'];
 
+    //Arrays of roles that assist actor in verb / activity
+    var deliveredRoles = ["paed", "obs reg", "anaes"];
+    var meetingRoles = ["Alone", "With colleagues"];
+
+    //resets session variables, required in case user changes verb of their activity midway through the input process
+    Session.set('circumstance', false);
+    Session.set('location', false);
+    Session.set('role', false);
+
     //gets the verb the user selected
     var selected = $('#verb').val();
     Session.set('verbText', selected);
@@ -74,10 +88,12 @@ Template.addmoment.events({
     if (selected === 'delivered') {
       Session.set('circumstance', deliveredCircumstances);
       Session.set('location', deliveredLocations);
+      Session.set('role', deliveredRoles);
     }
     else if (selected === 'attended') {
       Session.set('circumstance', attendedCircumstances);
       Session.set('location', meetingLocations);
+      Session.set('role', meetingRoles);
     }
     else if (selected === 'Attempted') {
       Session.set('circumstance', AttemptedCircumstances);
@@ -108,6 +124,9 @@ Template.addmoment.helpers({
   },
   locationOptions: function() {
     return Session.get('location');
+  },
+  roleOptions: function() {
+    return Session.get('role');
   }
 
 });
