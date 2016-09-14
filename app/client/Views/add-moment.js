@@ -124,8 +124,8 @@ Template.addmoment.events({
       id : "https://www.LRS.xyz/objects/" + verb + "-" + object,
       objectType : "Activity",
       definition : {
-        name : { "en-US" : verb + ' ' + object },
-        description : { "en-US" : verb + ' ' + object }
+        name : { "en-US" : object },
+        description : { "en-US" : object }
       }
     };
 
@@ -199,6 +199,7 @@ Template.addmoment.events({
       }
     };
   }
+  console.log(statementTemplate);
   // Client passes through the statement to the server/methods.js 'post' method.
   Meteor.call('post', statementTemplate, function() { console.log('submitted'); });
 
