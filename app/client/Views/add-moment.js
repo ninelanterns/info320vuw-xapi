@@ -35,11 +35,11 @@ Template.addmoment.events({
   //this function occurs whenever the user selects an activity
   'change #activities': function() {
     //Arrays of verbs for the activities
-    var Baby = ['select a verb','delivered','fed','bathed'];
-    var Meeting = ['select a verb','attended','participated'];
-    var Venepuncture = ['select a verb','Attempted','Completed','Failed'];
+    var Baby = ['select a verb','delivered','fed','bathed'],
+    Meeting = ['select a verb','attended','participated'],
+    Venepuncture = ['select a verb','Attempted','Completed','Failed'];
 
-    //resets session variables, required in case the user changes their activity halfway through the input process that all fields reset correctly
+    //reset2s session variables, required in case the user changes their activity halfway through the input process that all fields reset correctly
     Session.set('verb', false);
     Session.set('circumstance', false);
     Session.set('location', false);
@@ -83,18 +83,18 @@ Template.addmoment.events({
   //this function occurs whenever the user selects a verb
   'change #verb': function() {
     //Arrays of circumstances for the verbs
-    var deliveredCircumstances = ['C-Section','Ventouse', 'Forceps', 'Vaginal','Emergency'];
-    var attendedCircumstances = ['Professional development', 'Monthly meeting'];
-    var AttemptedCircumstances = [];
-    var error = ['Please select only a valid use case'];
+    var deliveredCircumstances = ['C-Section','Ventouse', 'Forceps', 'Vaginal','Emergency'],
+    attendedCircumstances = ['Professional development', 'Monthly meeting', 'patient meeting', 'Emergency'],
+    AttemptedCircumstances = [],
+    error = ['Please select only a valid use case'];
 
     //Arrays of locations for verb / activities
-    var deliveredLocations = ['Hospital', 'Vehicle (car etc.)', 'Other'];
-    var meetingLocations = ['Place of employment', 'Town Hall'];
+    var deliveredLocations = ['Hospital', 'Vehicle (car etc.)', 'Other'],
+    meetingLocations = ['Place of employment', 'Town Hall'];
 
     //Arrays of roles that assist actor in verb / activity
-    var deliveredRoles = ["paed", "obs reg", "anaes"];
-    var meetingRoles = ["Alone", "With colleagues"];
+    var deliveredRoles = ["paed", "obs reg", "anaes"],
+    meetingRoles = ["Alone", "With colleagues"];
 
     //resets session variables, required in case user changes verb of their activity midway through the input process
     Session.set('circumstance', false);
@@ -126,10 +126,11 @@ Template.addmoment.events({
   },
   //This function is called when user clicks 'save moment' button at bottom of page
   'click #submit-lm': function() {
-    var verb = $('#verb').val();
-    var object = $('#activities').val();
-    var statementTemplate = {};
-    var result = Session.get('result') / 5;
+    var verb = $('#verb').val(),
+    object = $('#activities').val(),
+    statementTemplate = {},
+    result = Session.get('result') / 5;
+
     //Hardcoded actor set to Mary Jane
     statementTemplate.actor = {
       name : "Mary Jane",
@@ -168,6 +169,10 @@ Template.addmoment.events({
       var timePressure = $('#emergency') === true ? 'Emergency' : 'Elective';
       var location = $('#location').val();
       var reflection = $('#reflection').val() !== "" ? $('#reflection').val() : false;
+      var subActivity = $('input[name="circumstance"]:checked').map(function() {
+        return this.value;
+      }).get();
+      subActivity = subActivity[0];
 
       //This gets simply gets all values from the role checkboxes and maps them into an array
       var roles = $('input[name="role"]:checked').map(function() {
@@ -180,7 +185,7 @@ Template.addmoment.events({
         extensions : {
           "https://wwww.LRS.xyz/context/time-pressure" : timePressure,
           "https://www.LRS.xyz/context/location" : location,
-          "https://www.LRS.xyz/context/sub-activity" : "c-section",
+          "https://www.LRS.xyz/context/sub-activity" : subActivity,
           "http://www.LRS.xyz/context/reflection" : reflection,
           "http://www.LRS.xyz/context/people": roles
         }
@@ -248,6 +253,9 @@ Template.addmoment.helpers({
   },
   roleOptions: function() {
     return Session.get('role');
+  },
+  isEmergency: function() {
+    return this.toString() === 'Emergency' ? true : false;
   }
 
 });

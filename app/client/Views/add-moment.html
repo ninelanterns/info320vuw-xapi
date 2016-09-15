@@ -76,7 +76,7 @@
             <div class="moment-q" id='circumstanceDiv'>
               <h2>What were the circumstances?</h2>
               {{#each circumstanceOptions}}
-                <input type="checkbox" name="circumstances" value="{{this}}"><label> {{this}}</label><br>
+                <input type="checkbox" name="{{#if isEmergency}}other{{else}}circumstance{{/if}}" value="{{this}}"><label> {{this}}</label><br>
               {{/each}}
             </div>
 
