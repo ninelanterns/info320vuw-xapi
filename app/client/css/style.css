@@ -151,7 +151,9 @@ section {
 footer {
   margin: 50px 0;
 }
-
+.iosFix {
+  cursor: pointer;
+}
 @media(max-width:768px) {
   section {
     padding-top: 25px;

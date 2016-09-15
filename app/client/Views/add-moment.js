@@ -12,7 +12,6 @@ Template.addmoment.onCreated(function (){
 Template.addmoment.events({
 
   'click .rating > span': function(e) {
-    e.preventDefault();
     //If user previously selected a rating then it is removed so that star rating tool functions as expected
     $('.star').removeClass('star');
 
