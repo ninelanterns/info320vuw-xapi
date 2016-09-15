@@ -13,6 +13,35 @@ h3 {
   font-size: 2em;
 }
 
+nav.navbar-inverse {
+  background-color: #fff !important;
+}
+
+.navbar-inverse .navbar-brand {
+  color:#549eff !important;
+}
+
+.navbar-inverse .navbar-toggle:hover {
+  background-color: #eee !important;
+}
+
+.navbar-inverse .navbar-toggle .icon-bar {
+  background-color: #549eff !important;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color:#549eff !important;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+  color: #549eff !important;
+  background-color: #eee !important;
+}
+
+section {
+  padding-top:50px !important;
+}
+
 .optional {
   font-size: 25px;
   color:#6c6c6c;
@@ -69,9 +98,9 @@ h3 {
 }
 .rating > span:hover:before,
 .rating > span:hover ~ span:before {
-   content: "\2605";
-   position: absolute;
-   cursor: pointer;
+ content: "\2605";
+ position: absolute;
+ cursor: pointer;
 }
 
 .image-bg-fluid-height,
@@ -130,11 +159,12 @@ section {
 
 .big-button {
   width: 100%;
-  background-color: #7e7e7e;
+  background-color: #fff;
   display: block;
   padding: 10px;
   text-align: center;
   color:#fff;
+  border-color: #333 !important;
 }
 
 .big-button:hover {
