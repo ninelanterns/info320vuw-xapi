@@ -71,14 +71,20 @@ section .container {
   resize:none;
 }
 
+.moment-q label {
+  padding-left: 12px;
+}
+
 #statement-container {
   text-align: center;
   padding: 0px 0 40px;
 }
 
 #statement-container span {
+  font-family: Georgia, serif;
   font-style: italic;
   font-size: 30px;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
 
 #statement-container span:before {
