@@ -51,6 +51,10 @@ section .container {
   margin:0 0 80px;
 }
 
+.moment-q h2 {
+  margin-bottom: 15px;
+}
+
 .moment-q select {
   width:100%;
   font-size: 20px;
@@ -67,14 +71,20 @@ section .container {
   resize:none;
 }
 
+.moment-q label {
+  padding-left: 12px;
+}
+
 #statement-container {
   text-align: center;
   padding: 0px 0 40px;
 }
 
 #statement-container span {
+  font-family: Georgia, serif;
   font-style: italic;
   font-size: 30px;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
 
 #statement-container span:before {
@@ -127,11 +137,11 @@ section .container {
 }
 
 section {
-  padding: 75px 0;
+  padding: 50px 0;
 }
 
 .section-heading {
-  margin: 30px 0;
+  margin: 0 0 30px;
   font-size: 4em;
 }
 
@@ -168,13 +178,13 @@ section {
 }
 
 .big-button:hover {
-  background-color: #338bff;
+  background-color: #0d41ab;
   color:#fff;
   text-decoration: none;
 }
 
 footer {
-  margin: 50px 0;
+  margin:0;
 }
 .iosFix {
   cursor: pointer;
