@@ -1,8 +1,17 @@
 Meteor.methods({
   // validates user xapi statements and then submits them to LL LRS.
   'post'(stmt) {
+
     //Validates statements
-    //
+
+    //Checks user entered an object
+    if (stmt.object.id === 'https://www.LRS.xyz/objects/-') {
+      throw new Meteor.Error("You have not entered an object");
+    }
+    //Checks user entered a verb
+    if (stmt.verb.id === 'https://www.LRS.xyz/verb/') {
+      throw new Meteor.Error("You have not entered an object");
+    }
     stmt.id = Math.uuid();
     //submits to LRS
     HTTP.post('https://v2.learninglocker.net/v1/data/xAPI/statements', {
