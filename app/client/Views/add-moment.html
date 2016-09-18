@@ -76,7 +76,7 @@
             <div class="moment-q" id='circumstanceDiv'>
               <h2>What were the circumstances?</h2>
               {{#each circumstanceOptions}}
-                <input type="checkbox" name="{{#if isEmergency}}other{{else}}circumstance{{/if}}" value="{{this}}"><label> {{this}}</label><br>
+              <input type="checkbox" name="{{#if isEmergency}}other{{else}}circumstance{{/if}}" value="{{this}}"><label> {{this}}</label><br>
               {{/each}}
             </div>
 
@@ -91,9 +91,9 @@
 
             <div class="moment-q" id='roleDiv'>
               <h2>Who else was involved in the activity?</h2>
-                {{#each roleOptions}}
-                <input type="checkbox" name="role" value="{{this}}" id='{{this}}'><label> {{this}}</label><br>
-                {{/each}}
+              {{#each roleOptions}}
+              <input type="checkbox" name="role" value="{{this}}" id='{{this}}'><label> {{this}}</label><br>
+              {{/each}}
             </div>
 
             <div class="moment-q" id='reflection-area'>
@@ -101,17 +101,9 @@
               <textarea id='reflection'></textarea>
             </div>
 
-            <section>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <a class="big-button" id='submit-lm' href='/'>Save Moment ⇡</a>
-      </div>
-    </div>
-    <!-- /.row -->
-  </div>
-  <!-- /.container -->
-</section>
+            <div class="moment-q">
+              <a class="big-button" id='submit-lm' href='/'>Save Moment ⇡</a>
+            </div>
 
         </form>
 <!-- <p class="lead section-lead"></p>
