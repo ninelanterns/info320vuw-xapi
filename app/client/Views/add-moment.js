@@ -83,16 +83,16 @@ Template.addmoment.events({
   'change #verb': function() {
     //Arrays of circumstances for the verbs
     var deliveredCircumstances = ['C-Section','Ventouse', 'Forceps', 'Vaginal','Emergency'],
-    attendedCircumstances = ['Professional development', 'Monthly meeting', 'patient meeting', 'Emergency'],
+    attendedCircumstances = ['Professional development', 'Monthly meeting', 'patient meeting'],
     AttemptedCircumstances = [],
     error = ['Please select only a valid use case'];
 
     //Arrays of locations for verb / activities
-    var deliveredLocations = ['Hospital', 'Vehicle (car etc.)', 'Other'],
+    var deliveredLocations = ['Hospital', 'Home', 'Vehicle (car etc.)', 'Other'],
     meetingLocations = ['Place of employment', 'Town Hall'];
 
     //Arrays of roles that assist actor in verb / activity
-    var deliveredRoles = ["paed", "obs reg", "anaes"],
+    var deliveredRoles = ["paed", "obs reg", "anaes", "other"],
     meetingRoles = ["Alone", "With colleagues"];
 
     //resets session variables, required in case user changes verb of their activity midway through the input process
