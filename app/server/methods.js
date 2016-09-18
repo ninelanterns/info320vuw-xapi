@@ -3,17 +3,19 @@ Meteor.methods({
   'post'(stmt) {
 
     //Validates statements
-
+    console.log(stmt.object.id);
+    console.log(stmt.verb.ib);
     //Checks user entered an object
-    if (stmt.object.id === 'https://www.LRS.xyz/objects/-') {
+    if (stmt.object.id === 'https://www.LRS.xyz/objects/null-...') {
       throw new Meteor.Error("You have not entered an object");
     }
     //Checks user entered a verb
-    if (stmt.verb.id === 'https://www.LRS.xyz/verb/') {
+    if (stmt.verb.id === 'https://www.LRS.xyz/verb/undefined') {
       throw new Meteor.Error("You have not entered an object");
     }
+
     stmt.id = Math.uuid();
-    //submits to LRS
+    // submits to LRS
     HTTP.post('https://v2.learninglocker.net/v1/data/xAPI/statements', {
       //TODO: put key and secret in settings.json file and configure gitignore
       auth: 'f5cf6b34662d4a46b80e288f7650387e89a8ed72:e136c18f8d1e3c5a36fc3ffbfae6a2fdfabfae4c',
