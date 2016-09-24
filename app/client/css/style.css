@@ -70,7 +70,9 @@ section .container {
   height:128px;
   resize:none;
 }
-
+.moment-q input {
+  width:100%;
+}
 .moment-q label {
   padding-left: 12px;
 }
