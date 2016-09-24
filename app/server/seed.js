@@ -3,7 +3,7 @@ Meteor.startup(function() {
     Users.insert({
       fname: 'Liam',
       lname: 'Murphy',
-      email: 'Liam@example.com'
+      email: 'Liam@example.com',
     });
   }
 });
