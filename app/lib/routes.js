@@ -4,3 +4,6 @@ Router.route('/', {
 Router.route('/add-moment', {
   template: 'addmoment'
 });
+Router.route('/profile', {
+  template: 'profile'
+});
