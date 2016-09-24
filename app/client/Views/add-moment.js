@@ -128,12 +128,13 @@ Template.addmoment.events({
     var verb = $('#verb').val(),
     object = $('#activities').val(),
     statementTemplate = {},
-    result = Session.get('result') / 5;
+    result = Session.get('result') / 5,
+    user = Users.find({}).fetch();
 
     //Hardcoded actor set to Mary Jane
     statementTemplate.actor = {
-      name : "Mary Jane",
-      mbox : "mailto:liam@example.com"
+      name : user[0].fname + ' ' + user[0].lname,
+      mbox : "mailto:" + user[0].email
     };
 
     statementTemplate.verb = {

@@ -29,11 +29,9 @@ Meteor.methods({
     });
   },
   'updateInfo'(data) {
-    console.log('triggered');
     var id = Users.find({}).fetch();
-    console.log(id);
     id = id[0]._id;
-    console.log(id);
+    
     Users.update(id, {
         $set: {
           'fname': data.fname,
