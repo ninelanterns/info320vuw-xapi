@@ -7,3 +7,6 @@ Router.route('/add-moment', {
 Router.route('/profile', {
   template: 'profile'
 });
+Router.configure({
+  layoutTemplate: 'main'
+});
