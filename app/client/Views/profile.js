@@ -16,5 +16,14 @@ Template.profile.helpers({
     var user = Users.find({}).fetch();
     return user[0].email;
   }
-
+});
+Template.profile.events({
+  'click #saveInfo': function() {
+    var data = {
+      fname: $('#fnameTextBox').val(),
+      lname: $('#lnameTextBox').val(),
+      email: $('#emailTextBox').val()
+    };
+    Meteor.call('updateInfo', data);
+  }
 });
