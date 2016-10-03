@@ -5,10 +5,56 @@ Session.set('activityText', '...');
 Session.set('verbText', '...');
 Session.set('role', false);
 
+var activityState = {
+  Baby: {
+    verbs: ['select a verb','delivered','fed','bathed'],
+    htmlElements: true
+  },
+  Meeting: {
+    verbs: ['select a verb','attended','participated'],
+    htmlElements: true
+  },
+  Venepuncture: {
+    verbs: ['select a verb','Attempted','Completed','Failed'],
+    htmlElements: false
+  }
+};
+var verbState = {
+  delivered: {
+    circumstances: ['C-Section','Ventouse', 'Forceps', 'Vaginal','Emergency'],
+    locations: ['Hospital', 'Home', 'Vehicle (car etc.)', 'Other'],
+    roles: ["paed", "obs reg", "anaes", "other"]
+  },
+  attended: {
+    circumstances: ['Professional development', 'Monthly meeting', 'patient meeting'],
+    locations: ['Place of employment', 'Town Hall'],
+    roles: ["Alone", "With colleagues"]
+  },
+  attempted: {
+    circumstances: [],
+    locations: [],
+    roles: []
+  },
+  error: ["Please select a valid use case"]
+};
+
 Template.addmoment.onCreated(function (){
   //code runs once template is loaded
 
 });
+function Hide(ele) {
+  var i = 0;
+      for (i; i < ele.length; i++) {
+        $('#' + ele[i]).fadeOut();
+      }
+}
+function Show(ele) {
+  var i = 0;
+      for (i; i < ele.length; i++) {
+        $('#' + ele[i]).show();
+      }
+}
+
 Template.addmoment.events({
 
   'click .rating > span': function(e) {
@@ -33,12 +79,9 @@ Template.addmoment.events({
 
   //this function occurs whenever the user selects an activity
   'change #activities': function() {
-    //Arrays of verbs for the activities
-    var Baby = ['select a verb','delivered','fed','bathed'],
-    Meeting = ['select a verb','attended','participated'],
-    Venepuncture = ['select a verb','Attempted','Completed','Failed'];
+    var elements = ['locationDiv', 'circumstanceDiv', 'roleDiv'];
 
-    //reset2s session variables, required in case the user changes their activity halfway through the input process that all fields reset correctly
+    //resets session variables, required in case the user changes their activity halfway through the input process that all fields reset correctly
     Session.set('verb', false);
     Session.set('circumstance', false);
     Session.set('location', false);
@@ -49,52 +92,18 @@ Template.addmoment.events({
     var selected = $('#activities').val();
     Session.set('activityText', selected);
 
-    //Sets verb session variable to an array of verbs relating to the activity selected
-    if (selected === 'Baby') {
-    Session.set('verb',Baby);
-
-      //Unhides location and circumstances div if user previously selected venepuncture activity
-      $('#locationDiv').show();
-      $('#circumstanceDiv').show();
-      $('#roleDiv').show();
-    }
-    else if (selected === 'Meeting') {
-      Session.set('verb',Meeting);
-
-      //Unhides location and circumstances div if user previously selected venepuncture activity
-      $('#locationDiv').show();
-      $('#circumstanceDiv').show();
-      $('#roleDiv').show();
-    }
-    else if (selected === 'Venepuncture') {
-      Session.set('verb',Venepuncture);
-
-      //Hides location and circumstances div since Venepuncture can be assumed to always happen in a doctors office or similar location under always similar contexts
-      $('#locationDiv').fadeOut();
-      $('#circumstanceDiv').fadeOut();
-      $('#roleDiv').fadeOut();
+    //Sets verb session variable to an array of verbs relating to activity selected & hides or shows elements if needed
+    Session.set('verb', activityState[selected].verbs);
+    if (activityState[selected].htmlElements !== true) {
+      Hide(elements);
     }
     else {
-      Session.set('verb', false);
+      Show(elements);
     }
   },
 
   //this function occurs whenever the user selects a verb
   'change #verb': function() {
-    //Arrays of circumstances for the verbs
-    var deliveredCircumstances = ['C-Section','Ventouse', 'Forceps', 'Vaginal','Emergency'],
-    attendedCircumstances = ['Professional development', 'Monthly meeting', 'patient meeting'],
-    AttemptedCircumstances = [],
-    error = ['Please select only a valid use case'];
-
-    //Arrays of locations for verb / activities
-    var deliveredLocations = ['Hospital', 'Home', 'Vehicle (car etc.)', 'Other'],
-    meetingLocations = ['Place of employment', 'Town Hall'];
-
-    //Arrays of roles that assist actor in verb / activity
-    var deliveredRoles = ["paed", "obs reg", "anaes", "other"],
-    meetingRoles = ["Alone", "With colleagues"];
-
     //resets session variables, required in case user changes verb of their activity midway through the input process
     Session.set('circumstance', false);
     Session.set('location', false);
@@ -104,25 +113,20 @@ Template.addmoment.events({
     var selected = $('#verb').val();
     Session.set('verbText', selected);
 
-    //Sets circumstance session variable to an array of contexts relating to the activity / verb selected
-    if (selected === 'delivered') {
-      Session.set('circumstance', deliveredCircumstances);
-      Session.set('location', deliveredLocations);
-      Session.set('role', deliveredRoles);
-    }
-    else if (selected === 'attended') {
-      Session.set('circumstance', attendedCircumstances);
-      Session.set('location', meetingLocations);
-      Session.set('role', meetingRoles);
-    }
-    else if (selected === 'Attempted') {
-      Session.set('circumstance', AttemptedCircumstances);
-    }
-    else {
-      Session.set('circumstance', error);
+    //If no valid use case is select set to error
+    if (verbState[selected] === undefined) {
+      Session.set('circumstance', verbState.error);
+      Session.set('location', verbState.error);
+      Session.set('role', verbState.error);
+    } else {
+      //Sets circumstance session variable to an array of contexts relating to the activity / verb selected
+      Session.set('circumstance', verbState[selected].circumstances);
+      Session.set('location', verbState[selected].locations);
+      Session.set('role', verbState[selected].roles);
     }
 
   },
+
   //This function is called when user clicks 'save moment' button at bottom of page
   'click #submit-lm': function() {
     var verb = $('#verb').val(),
@@ -131,7 +135,7 @@ Template.addmoment.events({
     result = Session.get('result') / 5,
     user = Users.find({}).fetch();
 
-    //Hardcoded actor set to Mary Jane
+    //Sets actor to first result found from database. (There should never be more than one user in this database anyways)
     statementTemplate.actor = {
       name : user[0].fname + ' ' + user[0].lname,
       mbox : "mailto:" + user[0].email
@@ -155,12 +159,6 @@ Template.addmoment.events({
       score: {
         scaled: result
       }
-    };
-
-    //Like actor authority is hardcoded into the statement
-    statementTemplate.authority = {
-      name : "Mary Jane",
-      mbox : "mailto:liam@example.com"
     };
 
     //Fills out the context depending on which type of statement it is. (Baby delivery / Attending a meeting / Attempting venepuncture)

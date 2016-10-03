@@ -18,20 +18,18 @@ Meteor.methods({
     // submits to LRS
     HTTP.post('https://v2.learninglocker.net/v1/data/xAPI/statements', {
       //TODO: put key and secret in settings.json file and configure gitignore
-      auth: 'f5cf6b34662d4a46b80e288f7650387e89a8ed72:e136c18f8d1e3c5a36fc3ffbfae6a2fdfabfae4c',
+      auth: '5b695ccc3e4607824152ff7f20b379457ebdeed9:202587af2b2f39d8d4032ac33e0a167433c96e32',
       headers: {
         'X-Experience-API-Version': '1.0.1',
       },
       data: stmt,
     }, function(err, result) {
-      console.log(result);
-      return result;
     });
   },
   'updateInfo'(data) {
     var id = Users.find({}).fetch();
     id = id[0]._id;
-    
+
     Users.update(id, {
         $set: {
           'fname': data.fname,
