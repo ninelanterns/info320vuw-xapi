@@ -4,7 +4,7 @@ Meteor.methods({
 
     //Validates statements
     console.log(stmt.object.id);
-    console.log(stmt.verb.ib);
+    console.log(stmt.verb.id);
     //Checks user entered an object
     if (stmt.object.id === 'https://www.LRS.xyz/objects/null-...') {
       throw new Meteor.Error("You have not entered an object");

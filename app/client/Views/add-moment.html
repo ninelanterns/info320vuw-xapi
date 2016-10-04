@@ -37,17 +37,21 @@
             </div>
 
             <!-- need to put the things in between here !-->
+            <div class="moment-q" id='emergencyDiv'>
+              <h2>Was it an emergency?</h2>
+              <input type="checkbox" name="emergency" value="yes" id='emergencyCheckBox' data-context="time-pressure"><label>Emergency</label><br>
+            </div>
 
             <div class="moment-q" id='circumstanceDiv'>
               <h2>What were the circumstances?</h2>
               {{#each circumstanceOptions}}
-              <input type="checkbox" name="{{#if isEmergency}}other{{else}}circumstance{{/if}}" value="{{this}}"><label> {{this}}</label><br>
+              <input type="radio" name="{{#if isEmergency}}other{{else}}circumstance{{/if}}" value="{{this}}" data-context='{{#if isEmergency}}other{{else}}circumstance{{/if}}'><label> {{this}}</label><br>
               {{/each}}
             </div>
 
             <div class="moment-q" id='locationDiv'>
               <h2>What location did your activity take place?</h2>
-              <select name="location" id='location'>
+              <select name="location" id='location' data-context="location">
                 {{#each locationOptions}}
                 <option value={{this}}>{{this}}</option>
                 {{/each}}
@@ -57,13 +61,13 @@
             <div class="moment-q" id='roleDiv'>
               <h2>Who else was involved in the activity?</h2>
               {{#each roleOptions}}
-              <input type="checkbox" name="role" value="{{this}}" id='{{this}}'><label> {{this}}</label><br>
+              <input type="checkbox" name="role" value="{{this}}" id='{{this}}' data-context="role"><label> {{this}}</label><br>
               {{/each}}
             </div>
 
             <div class="moment-q" id='reflection-area'>
               <h2>Reflection - Any extra notes? <span class="optional">(optional)</span></h2>
-              <textarea id='reflection'></textarea>
+              <textarea id='reflection' data-context="reflection"></textarea>
             </div>
 
             <div class="moment-q">

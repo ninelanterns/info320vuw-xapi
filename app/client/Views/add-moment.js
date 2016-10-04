@@ -7,53 +7,56 @@ Session.set('role', false);
 
 var activityState = {
   Baby: {
-    verbs: ['select a verb','delivered','fed','bathed'],
-    htmlElements: true
+    verbs: ['select a verb','delivered','fed','bathed']
   },
   Meeting: {
-    verbs: ['select a verb','attended','participated'],
-    htmlElements: true
+    verbs: ['select a verb','attended','participated']
   },
   Venepuncture: {
-    verbs: ['select a verb','Attempted','Completed','Failed'],
-    htmlElements: false
+    verbs: ['select a verb','Attempted','Completed','Failed']
   }
 };
 var verbState = {
   delivered: {
-    circumstances: ['C-Section','Ventouse', 'Forceps', 'Vaginal','Emergency'],
+    circumstances: ['C-Section','Ventouse', 'Forceps', 'Vaginal'],
     locations: ['Hospital', 'Home', 'Vehicle (car etc.)', 'Other'],
-    roles: ["paed", "obs reg", "anaes", "other"]
+    roles: ["paed", "obs reg", "anaes", "other"],
+    htmlElements: ['locationDiv', 'circumstanceDiv', 'roleDiv', 'emergencyDiv']
   },
   attended: {
     circumstances: ['Professional development', 'Monthly meeting', 'patient meeting'],
     locations: ['Place of employment', 'Town Hall'],
-    roles: ["Alone", "With colleagues"]
+    roles: ["Alone", "With colleagues"],
+    htmlElements: ['locationDiv', 'circumstanceDiv', 'roleDiv']
   },
-  attempted: {
+  Attempted: {
     circumstances: [],
     locations: [],
-    roles: []
+    roles: [],
+    htmlElements: []
   },
   error: ["Please select a valid use case"]
 };
+function showContexts(ele) {
+  var defaultElements = ['locationDiv', 'circumstanceDiv', 'roleDiv', 'emergencyDiv'];
 
-Template.addmoment.onCreated(function (){
-  //code runs once template is loaded
+  var k = 0;
+  for (k; k < defaultElements.length; k++) {
+    console.log(k);
+    $('#' + defaultElements[k]).fadeOut();
+  }
+  ele = ele === undefined ? 0 : ele;
+  var i = 0;
+  for (i; i < ele.length; i++) {
+    $('#' + ele[i]).fadeIn();
+  }
+}
+
+Template.addmoment.onRendered(function() {
+  var elements = ['locationDiv', 'circumstanceDiv', 'roleDiv', 'emergencyDiv'];
+  showContexts();
 
 });
-function Hide(ele) {
-  var i = 0;
-      for (i; i < ele.length; i++) {
-        $('#' + ele[i]).fadeOut();
-      }
-}
-function Show(ele) {
-  var i = 0;
-      for (i; i < ele.length; i++) {
-        $('#' + ele[i]).show();
-      }
-}
 
 Template.addmoment.events({
 
@@ -79,7 +82,6 @@ Template.addmoment.events({
 
   //this function occurs whenever the user selects an activity
   'change #activities': function() {
-    var elements = ['locationDiv', 'circumstanceDiv', 'roleDiv'];
 
     //resets session variables, required in case the user changes their activity halfway through the input process that all fields reset correctly
     Session.set('verb', false);
@@ -87,19 +89,15 @@ Template.addmoment.events({
     Session.set('location', false);
     Session.set('role', false);
     Session.set('verbText', '...');
+    showContexts();
 
     //gets the activity the user selected
     var selected = $('#activities').val();
     Session.set('activityText', selected);
 
-    //Sets verb session variable to an array of verbs relating to activity selected & hides or shows elements if needed
+    //Sets verb session variable to an array of verbs relating to activity selected
     Session.set('verb', activityState[selected].verbs);
-    if (activityState[selected].htmlElements !== true) {
-      Hide(elements);
-    }
-    else {
-      Show(elements);
-    }
+
   },
 
   //this function occurs whenever the user selects a verb
@@ -112,6 +110,10 @@ Template.addmoment.events({
     //gets the verb the user selected
     var selected = $('#verb').val();
     Session.set('verbText', selected);
+
+    //hides or shows elements if needed
+    var html = verbState[selected] === undefined ? [] : verbState[selected].htmlElements;
+    showContexts(html);
 
     //If no valid use case is select set to error
     if (verbState[selected] === undefined) {
@@ -161,10 +163,18 @@ Template.addmoment.events({
       }
     };
 
+    // The beginnings of code to make the if statement below less awful to look at and redundant.
+    // var listOfContexts = document.querySelectorAll('context');
+    // var length = listOfContexts.length;
+    // var context = [];
+    //
+    // for (var i = 0; i < length; i++) {
+    //   context[i] = "https://wwww.LRS.xyz/context/" + listOfContexts[i].val();
+    // }
+
     //Fills out the context depending on which type of statement it is. (Baby delivery / Attending a meeting / Attempting venepuncture)
     if ( verb === 'delivered') {
-
-      var timePressure = $('#emergency') === true ? 'Emergency' : 'Elective';
+      var timePressure = $('#emergencyCheckBox').val() === "yes" ? 'Emergency' : 'Elective';
       var location = $('#location').val();
       var reflection = $('#reflection').val() !== "" ? $('#reflection').val() : false;
       var subActivity = $('input[name="circumstance"]:checked').map(function() {
