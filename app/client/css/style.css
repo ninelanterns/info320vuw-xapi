@@ -90,6 +90,42 @@ section .container {
 .moment-q label {
   padding-left: 12px;
 }
+.moment-q.profile {
+  margin:0 auto;
+  text-align: center;
+}
+.moment-q.profile input {
+  margin-top: 15px;
+  padding:3px;
+  font-size: 17px;
+}
+
+.moment-q.profile input.prof-first-name,
+.moment-q.profile input.prof-last-name {
+  width:49%;
+}
+
+.moment-q.profile input.prof-first-name {
+  float:left;
+}
+
+.moment-q.profile input.prof-last-name {
+  float:right;
+}
+
+.moment-q.profile a {
+  margin-top: 25px;
+  display: inline-block;
+  padding: 10px 15px;
+  background-color:#008B45;
+  color:#fff;
+}
+
+.moment-q.profile a:hover {
+  text-decoration: none;
+  background-color:#006d36;
+  cursor: pointer;
+}
 
 #statement-container {
   text-align: center;

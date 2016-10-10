@@ -3,8 +3,8 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-5">
-          <div class="moment-q">
-            <h1>Hey there, {{name}}</h1>
+          <div class="moment-q profile">
+           <!--  <h1>Hey there, {{name}}</h1>
           </div>
           <div class="moment-q">
               <h2>First name</h2>
@@ -22,7 +22,14 @@
         <div class='col-lg-12'>
           <div class="moment-q">
             <a class="big-button" id="saveInfo">Update Information</a>
-          </div>
+          </div> -->
+          <h1>Hey there, {{name}}!</h1>
+          <input class="prof-first-name" type='text' id='fnameTextBox' value='{{fname}}'/>
+          <input class="prof-last-name" type='text' id='lnameTextBox' value='{{lname}}'/>
+          <input class="prof-email" type='text' id='emailTextBox' value='{{email}}'/>
+          <a class="form-button" id="saveInfo">Update Information</a>
+
+        </div>
         </div>
       </div>
     </div>
